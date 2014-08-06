@@ -1,0 +1,64 @@
+<script>
+
+  var gameWelcome = alert("Welcome to the coin toss game!");
+  String.prototype.capitalize = function() {
+    return this.charAt(0).toUpperCase() + this.slice(1);
+  }
+  var name = prompt("Please insert your name.").toLowerCase().capitalize();
+  var gameWelcome = alert("Awesome " + name + " ! You have 3 tries to predict if the coin will land on heads or a tail\nIf you guess correctly within 3 tries, you win the game!\n\nGood Luck! " + name + "!")
+  var count = 0;
+
+  var gameStart = function() {
+    var number = 2;
+    var difference = number - count;
+    var coinToss = Math.random();
+    var userChoice = prompt("Do you choose HEADS or TAILS?").toUpperCase();
+    if (userChoice === "HEADS") {
+        if (coinToss < 0.5) {
+            alert("The coin landed on heads. You Win!");
+        } else {
+            if (difference === 1) {
+              alert("The coin landed on tails. You Lose!\nTake another shot! " + difference + " more try left!");
+            }else{
+              alert("The coin landed on tails. You Lose!\nTake another shot! " + difference + " tries left!");
+            }
+            count++;
+            if (count > 2) {
+              return;
+            }
+            gameStart();
+        }
+    } else if (userChoice === "TAILS") {
+        if (coinToss < 0.5) {
+          if (difference === 1) {
+            alert("The coin landed on tails. You Lose!\nTake another shot! " + difference + " more try left!");
+          }else{
+            alert("The coin landed on heads. You Lose!\nTake another shot! " + difference + " tries left!");
+          }
+            count++;
+            if (count > 2) {
+              return;
+            }
+            gameStart();
+        } else {
+            alert("The coin landed on tails. You Win!");
+        }
+    } else {
+            var message = [
+              "Please choose either Heads or Tails.\nYou have " + difference + " tries left!",
+              "Sorry, you need to insert Heads or Tails. Please try again.\nYou have " + difference + " more try left!",
+              "Thank you for playing. You have " + difference + " tries left!\nBye bye."
+            ];
+
+            alert(message[count]);
+            count++;
+            if (count > 2) {
+              return;
+            }
+            gameStart();
+    }
+  };
+
+  gameStart();
+
+</script>
